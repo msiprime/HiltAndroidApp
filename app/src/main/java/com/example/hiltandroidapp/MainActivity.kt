@@ -4,8 +4,12 @@ import com.example.hiltandroidapp.campussheba.ShebaViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -15,8 +19,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberAsyncImagePainter
 import com.example.hiltandroidapp.campussheba.data.model.ShebaCategory
 import com.example.hiltandroidapp.core.ui.theme.HiltAndroidAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,8 +50,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//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
-//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
+//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
+//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
 
 @Composable
 fun ShebaCategoryList(viewModel: ShebaViewModel = hiltViewModel()) {
@@ -52,16 +62,28 @@ fun ShebaCategoryList(viewModel: ShebaViewModel = hiltViewModel()) {
     ShebaList(list = shebaData)
 
 }
+
 @Composable
-fun CategoryItem(category: ShebaCategory) {
-    // Customize the UI to display a single category item
-    // You can use category.name, category.description, category.imageUrl, etc.
-    Column {
-        category.name?.let { Text(text = it) }
+fun CategoryItem(category: ShebaCategory, modifier: Modifier = Modifier) {
+
+    Column(modifier = modifier) {
+        category.imageUrl?.let {
+            Image(
+                painter = rememberAsyncImagePainter(model = it),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(bottom = 10.dp)
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentScale = ContentScale.Crop
+            )
+        }
+        category.name?.let { Text(text = it,fontWeight = FontWeight.Bold, fontSize = 20.sp,modifier = modifier.padding(bottom = 5.dp)) }
         category.description?.let { Text(text = it) }
-        // Add an Image or other UI elements if needed
+
     }
 }
+
 @Composable
 fun ShebaList(list: List<ShebaCategory>) {
     LazyColumn {
