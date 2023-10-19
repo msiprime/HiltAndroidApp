@@ -1,4 +1,4 @@
-package com.example.hiltandroidapp.ui.theme
+package com.example.hiltandroidapp.core.ui.theme
 
 import android.app.Activity
 import android.os.Build
