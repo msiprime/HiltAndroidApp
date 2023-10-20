@@ -94,6 +94,9 @@ dependencies {
     implementation ("androidx.compose.material:material:1.5.4")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0-alpha02")
+    implementation ("io.coil-kt:coil-compose:2.4.0")
+
+
 
 
 }
