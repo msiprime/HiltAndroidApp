@@ -62,7 +62,14 @@ fun ShebaCategoryList(viewModel: ShebaViewModel = hiltViewModel()) {
     ShebaList(list = shebaData)
 
 }
-
+@Composable
+fun ShebaList(list: List<ShebaCategory>) {
+    LazyColumn {
+        items(list) { category ->
+            CategoryItem(category)
+        }
+    }
+}
 @Composable
 fun CategoryItem(category: ShebaCategory, modifier: Modifier = Modifier) {
 
@@ -78,25 +85,27 @@ fun CategoryItem(category: ShebaCategory, modifier: Modifier = Modifier) {
                 contentScale = ContentScale.Crop
             )
         }
-        category.name?.let { Text(text = it,fontWeight = FontWeight.Bold, fontSize = 20.sp,modifier = modifier.padding(bottom = 5.dp)) }
+        category.name?.let { Text(text = it,fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            modifier = modifier.padding(bottom = 5.dp)) }
         category.description?.let { Text(text = it) }
 
     }
 }
 
-@Composable
-fun ShebaList(list: List<ShebaCategory>) {
-    LazyColumn {
-        items(list) { category ->
-            CategoryItem(category)
-        }
-    }
-}
 
+
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    HiltAndroidAppTheme {
+//        ShebaCategoryList()
+//    }
+//}
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun CategoryPreview() {
     HiltAndroidAppTheme {
-        ShebaCategoryList()
+        CategoryItem(ShebaCategory())
     }
 }
