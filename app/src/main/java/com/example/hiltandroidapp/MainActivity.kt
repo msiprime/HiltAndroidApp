@@ -54,9 +54,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//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
-//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
-
+//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
 @Composable
 fun ShebaCategoryList(viewModel: ShebaViewModel = hiltViewModel()) {
     // Collect data from the ViewModel
