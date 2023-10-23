@@ -1,6 +1,7 @@
 package com.example.hiltandroidapp
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import com.example.hiltandroidapp.campussheba.ShebaViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,9 +54,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//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
-//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
-
+//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
 @Composable
 fun ShebaCategoryList(viewModel: ShebaViewModel = hiltViewModel()) {
     // Collect data from the ViewModel
@@ -101,15 +99,22 @@ fun CategoryItem(category: ShebaCategory, modifier: Modifier = Modifier) {
         }
         category.description?.let { Text(text = it) }
         Button(onClick = {
-            Intent(Intent.ACTION_MAIN).also {
-                it.`package` = "com.google.android.youtube"
-                context.startActivity(it)
+            val intent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_EMAIL,arrayOf("msisakib958@gmail.com"))
+                putExtra(Intent.EXTRA_SUBJECT,"This is my subject")
+                putExtra(Intent.EXTRA_TEXT,"This is my content")
+            }
+            if (intent.resolveActivity(context.packageManager)!=null){
+                startActivity(context,intent,null)
             }
         }) {
-            Text(text = "Goto Youtube")
+            Text(text = "click me")
         }
     }
 }
+
+
 
 
 @Preview(showBackground = true)
